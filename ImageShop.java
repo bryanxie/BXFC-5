@@ -197,7 +197,7 @@ class RotateRightButton extends ImageShopButton {
 
 	/*
 	 * Creates a new image which consists of the bits in the original image
-	 * rotated left 90 degrees.  
+	 * rotated right 90 degrees.  
 	 */
 
 	public void execute(ImageShop app) {
@@ -209,7 +209,7 @@ class RotateRightButton extends ImageShopButton {
 		int[][] newArray = new int[width][height];
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
-				newArray[j][i] = array[i][j];
+				newArray[j][i + 1] = array[i][j];
 			}
 		}
 		app.setImage(new GImage(newArray));
