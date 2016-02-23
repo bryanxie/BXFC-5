@@ -15,43 +15,44 @@ public class ImageShop extends GraphicsProgram {
 
 	public void init() {
 		add(new FlipVerticalButton(), WEST);
+		add(new FlipHorizontalButton(), WEST);
 		addActionListeners();
 		ui = new ImageShopUI(this);
 	}
 
-/**
- * Gets the image from the ImageShopUI.
- *
- * @return The current image or null if there isn't one
- */
+	/**
+	 * Gets the image from the ImageShopUI.
+	 *
+	 * @return The current image or null if there isn't one
+	 */
 
 	public GImage getImage() {
 		return ui.getImage();
 	}
 
-/**
- * Sets the current image.
- *
- * @param image The new GImage
- */
+	/**
+	 * Sets the current image.
+	 *
+	 * @param image The new GImage
+	 */
 
 	public void setImage(GImage image) {
 		ui.setImage(image);
 	}
 
-/* Implement the ActionListener interface */
+	/* Implement the ActionListener interface */
 
 	public void actionPerformed(ActionEvent e) {
 		ImageShopButton button = (ImageShopButton) e.getSource();
 		button.execute(this);
 	}
 
-/* Constants */
+	/* Constants */
 
 	public static final int APPLICATION_WIDTH = 950;
 	public static final int APPLICATION_HEIGHT = 600;
 
-/* Private instance variables */
+	/* Private instance variables */
 
 	private ImageShopUI ui;
 
@@ -78,23 +79,23 @@ public class ImageShop extends GraphicsProgram {
 
 abstract class ImageShopButton extends JButton {
 
-/**
- * Constructs a new ImageShopButton.  Subclasses must invoke this
- * constructor with the appropriate button name.
- *
- * @param name The name that appears on the button
- */
+	/**
+	 * Constructs a new ImageShopButton.  Subclasses must invoke this
+	 * constructor with the appropriate button name.
+	 *
+	 * @param name The name that appears on the button
+	 */
 
 	public ImageShopButton(String name) {
 		super(name);
 	}
 
-/**
- * Executes the operation for the specific button.  This method must
- * be defined individually for each subclass.
- *
- * @param app The ImageShop application
- */
+	/**
+	 * Executes the operation for the specific button.  This method must
+	 * be defined individually for each subclass.
+	 *
+	 * @param app The ImageShop application
+	 */
 
 	public abstract void execute(ImageShop app);
 
@@ -111,11 +112,11 @@ class FlipVerticalButton extends ImageShopButton {
 		super("Flip Vertical");
 	}
 
-/*
- * Creates a new image which consists of the bits in the original image
- * flipped vertically around the center line.  This code comes from
- * page 434 of The Art and Science of Java.
- */
+	/*
+	 * Creates a new image which consists of the bits in the original image
+	 * flipped vertically around the center line.  This code comes from
+	 * page 434 of The Art and Science of Java.
+	 */
 
 	public void execute(ImageShop app) {
 		GImage image = app.getImage();
@@ -130,5 +131,26 @@ class FlipVerticalButton extends ImageShopButton {
 		}
 		app.setImage(new GImage(array));
 	}
+}
+
+class FlipHorizontalButton extends ImageShopButton {
+
+	public FlipHorizontalButton() {
+		super("Flip Horizontal");
+	}
+
+	/*
+	 * Creates a new image which consists of the bits in the original image
+	 * flipped vertically around the center line.  This code comes from
+	 * page 434 of The Art and Science of Java.
+	 */
+
+	public void execute(ImageShop app) {
+		GImage image = app.getImage();
+		if (image == null) return;
+		int[][] array = image.getPixelArray();
+		app.setImage(new GImage(array));
+	}
 
 }
+
