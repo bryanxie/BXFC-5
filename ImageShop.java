@@ -17,6 +17,7 @@ public class ImageShop extends GraphicsProgram {
 		add(new FlipVerticalButton(), WEST);
 		add(new FlipHorizontalButton(), WEST);
 		add(new RotateLeftButton(), WEST);
+		add(new RotateRightButton(), WEST);
 		addActionListeners();
 		ui = new ImageShopUI(this);
 	}
@@ -182,6 +183,33 @@ class RotateLeftButton extends ImageShopButton {
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
 				newArray[width - j - 1][i] = array[i][j];
+			}
+		}
+		app.setImage(new GImage(newArray));
+	}
+}
+
+class RotateRightButton extends ImageShopButton {
+
+	public RotateRightButton() {
+		super("Rotate Right");
+	}
+
+	/*
+	 * Creates a new image which consists of the bits in the original image
+	 * rotated left 90 degrees.  
+	 */
+
+	public void execute(ImageShop app) {
+		GImage image = app.getImage();
+		if (image == null) return;
+		int[][] array = image.getPixelArray();
+		int height = array.length;
+		int width = array[0].length;
+		int[][] newArray = new int[width][height];
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
+				newArray[j][i] = array[i][j];
 			}
 		}
 		app.setImage(new GImage(newArray));
