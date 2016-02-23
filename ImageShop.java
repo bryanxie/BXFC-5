@@ -45,7 +45,7 @@ public class ImageShop extends GraphicsProgram {
 
 	public void actionPerformed(ActionEvent e) {
 		ImageShopButton button = (ImageShopButton) e.getSource();
-		button.execute(this);
+		button.execute(this); //passing yourself for the ride. i have info on the image, so i need to give it to you
 	}
 
 	/* Constants */
@@ -150,11 +150,11 @@ class FlipHorizontalButton extends ImageShopButton {
 		if (image == null) return;
 		int[][] array = image.getPixelArray();
 		int width = array[0].length;
-		for (int p1 = 0; p1 < width / 2; p1++) {
-			int p2 = width - p1 - 1;
-			int[] temp = array [p1];
-			array[p1] = array[p2];
-			array[p2] = temp;
+		for (int i = 0; i < array.length; i++) {
+			for (int j = 0; j < width; j++) {
+				int temp = array[i][width - j - 1];
+				
+			}
 		}
 		app.setImage(new GImage(array));
 	}
@@ -180,10 +180,6 @@ class RotateLeftButton extends ImageShopButton {
 		int[][] newArray = new int[width][height];
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
-				int index = width - j - 1;
-				//if (index > newArray.length) System.out.println("Trying to access " + index + ", length is " + newArray.length);
-				//if (i > newArray[0].length) System.out.println("Trying to access " + i + ", length[0] is " + newArray[0].length);
-				
 				newArray[width - j - 1][i] = array[i][j];
 			}
 		}
