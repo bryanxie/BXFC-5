@@ -151,9 +151,10 @@ class FlipHorizontalButton extends ImageShopButton {
 		int[][] array = image.getPixelArray();
 		int width = array[0].length;
 		for (int i = 0; i < array.length; i++) {
-			for (int j = 0; j < width; j++) {
+			for (int j = 0; j < width / 2; j++) {
 				int temp = array[i][width - j - 1];
-				
+				array[i][width - j - 1] = array[i][j];
+				array[i][j] = temp;
 			}
 		}
 		app.setImage(new GImage(array));
