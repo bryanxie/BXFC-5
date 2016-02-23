@@ -209,7 +209,7 @@ class RotateRightButton extends ImageShopButton {
 		int[][] newArray = new int[width][height];
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
-				newArray[j][i + 1] = array[i][j];
+				newArray[j][height - i - 1] = array[i][j];
 			}
 		}
 		app.setImage(new GImage(newArray));
