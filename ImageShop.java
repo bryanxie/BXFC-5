@@ -179,10 +179,10 @@ class RotateLeftButton extends ImageShopButton {
 		int width = array[0].length;
 		int[][] newArray = new int[width][height];
 		for (int i = 0; i < height; i++) {
-			for (int j = 0; j < width; i++) {
+			for (int j = 0; j < width; j++) {
 				int index = width - j - 1;
-				if (index > newArray.length) System.out.println("Trying to access " + index + ", length is " + newArray.length);
-				if (i > newArray[0].length) System.out.println("Trying to access " + i + ", length[0] is " + newArray[0].length);
+				//if (index > newArray.length) System.out.println("Trying to access " + index + ", length is " + newArray.length);
+				//if (i > newArray[0].length) System.out.println("Trying to access " + i + ", length[0] is " + newArray[0].length);
 				
 				newArray[width - j - 1][i] = array[i][j];
 			}
