@@ -125,7 +125,7 @@ class FlipVerticalButton extends ImageShopButton {
 		int[][] array = image.getPixelArray();
 		int height = array.length;
 		for (int p1 = 0; p1 < height / 2; p1++) {
-			int p2 = height - p1 - 1;
+			int p2 = height - p1;
 			int[] temp = array[p1];
 			array[p1] = array[p2];
 			array[p2] = temp;
@@ -158,7 +158,6 @@ class FlipHorizontalButton extends ImageShopButton {
 		}
 		app.setImage(new GImage(array));
 	}
-
 }
 
 class RotateLeftButton extends ImageShopButton {
@@ -186,6 +185,4 @@ class RotateLeftButton extends ImageShopButton {
 		}
 		app.setImage(new GImage(newArray));
 	}
-
 }
-
