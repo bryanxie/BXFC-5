@@ -16,6 +16,7 @@ public class ImageShop extends GraphicsProgram {
 	public void init() {
 		add(new FlipVerticalButton(), WEST);
 		add(new FlipHorizontalButton(), WEST);
+		add(new RotateLeftButton(), WEST);
 		addActionListeners();
 		ui = new ImageShopUI(this);
 	}
@@ -141,8 +142,27 @@ class FlipHorizontalButton extends ImageShopButton {
 
 	/*
 	 * Creates a new image which consists of the bits in the original image
-	 * flipped vertically around the center line.  This code comes from
-	 * page 434 of The Art and Science of Java.
+	 * flipped horizontally around the center line.  
+	 */
+
+	public void execute(ImageShop app) {
+		GImage image = app.getImage();
+		if (image == null) return;
+		int[][] array = image.getPixelArray();
+		app.setImage(new GImage(array));
+	}
+
+}
+
+class RotateLeftButton extends ImageShopButton {
+
+	public RotateLeftButton() {
+		super("RotateLeft");
+	}
+
+	/*
+	 * Creates a new image which consists of the bits in the original image
+	 * flipped horizontally around the center line.  
 	 */
 
 	public void execute(ImageShop app) {
