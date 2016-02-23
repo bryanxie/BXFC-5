@@ -162,13 +162,21 @@ class RotateLeftButton extends ImageShopButton {
 
 	/*
 	 * Creates a new image which consists of the bits in the original image
-	 * flipped horizontally around the center line.  
+	 * rotated left 90 degrees.  
 	 */
 
 	public void execute(ImageShop app) {
 		GImage image = app.getImage();
 		if (image == null) return;
 		int[][] array = image.getPixelArray();
+		int height = array.length;
+		int width = array[0].length;
+		int[][] newArray = new int[width][height];
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; i++) {
+				newArray[i][j] = array[j][i];
+			}
+		}
 		app.setImage(new GImage(array));
 	}
 
