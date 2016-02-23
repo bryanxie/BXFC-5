@@ -157,7 +157,7 @@ class FlipHorizontalButton extends ImageShopButton {
 class RotateLeftButton extends ImageShopButton {
 
 	public RotateLeftButton() {
-		super("RotateLeft");
+		super("Rotate Left");
 	}
 
 	/*
