@@ -237,7 +237,7 @@ class GrayscaleButton extends ImageShopButton {
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
 				int pixel = array[i][j];
-				int red = (pixel >> 16) & 0xFF;
+				int red = GImage.getRed(pixel);//(pixel >> 16) & 0xFF;
 				int green = (pixel >> 8) & 0xFF;
 				int blue = pixel & 0xFF;
 				int xx = computeLuminosity(red, green, blue);
