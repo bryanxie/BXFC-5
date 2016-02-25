@@ -302,6 +302,7 @@ class EqualizeButton extends ImageShopButton {
 		int width = array[0].length;
 		int totalPixel = height * width;
 		int[] luminosityHistogram = new int[256]; 
+		int[] luminosityCulHistogram = new int[256];
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
 				int pixel = array[i][j];
@@ -314,6 +315,7 @@ class EqualizeButton extends ImageShopButton {
 		}
 		for (int i = 0; i < luminosityHistogram.length - 1; i++) {
 			luminosityHistogram[i + 1] += luminosityHistogram[i];
+			luminosityCulHistogram = luminosityHistogram;
 		}
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
@@ -322,7 +324,7 @@ class EqualizeButton extends ImageShopButton {
 				int green = GImage.getGreen(pixel);
 				int blue = GImage.getBlue(pixel);
 				int luminosity = ImageShop.computeLuminosity(red, green, blue);
-				array[i][j] = (255 * luminosityHistogram[luminosity] / totalPixel);
+				array[i][j] = (255 * luminosityCulHistogram[luminosity] / totalPixel);
 			}
 		}
 		app.setImage(new GImage(array));
