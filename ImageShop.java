@@ -7,8 +7,11 @@
 
 import acm.graphics.*;
 import acm.program.*;
+
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
+
 import javax.swing.*;
 
 public class ImageShop extends GraphicsProgram {
@@ -313,7 +316,7 @@ class EqualizeButton extends ImageShopButton {
 				luminosityHistogram[luminosity]++;
 			}
 		}
-		System.out.print(luminosityHistogram);
+		System.out.print(Arrays.toString(luminosityHistogram));
 		for (int i = 0; i < luminosityHistogram.length - 1; i++) {
 			luminosityHistogram[i + 1] += luminosityHistogram[i];
 			luminosityCulHistogram = luminosityHistogram;
