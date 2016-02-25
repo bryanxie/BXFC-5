@@ -19,6 +19,7 @@ public class ImageShop extends GraphicsProgram {
 		add(new RotateLeftButton(), WEST);
 		add(new RotateRightButton(), WEST);
 		add(new GrayscaleButton(), WEST);
+		add(new GreenScreenButton(), WEST);
 		addActionListeners();
 		ui = new ImageShopUI(this);
 	}
@@ -224,8 +225,42 @@ class GrayscaleButton extends ImageShopButton {
 	}
 
 	/*
-	 * Creates a new image which consists of the bits in the original image
-	 * rotated right 90 degrees.  
+	 * Creates a grayscale image of the original image
+	 */
+
+	public void execute(ImageShop app) {
+		GImage image = app.getImage();
+		if (image == null) return;
+		int[][] array = image.getPixelArray();
+		int height = array.length;
+		int width = array[0].length;
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
+				int pixel = array[i][j];
+				int red = (pixel >> 16) & 0xFF;
+				int green = (pixel >> 8) & 0xFF;
+				int blue = pixel & 0xFF;
+				int xx = computeLuminosity(red, green, blue);
+				pixel = (0xFF << 24) | (xx << 16) | (xx << 8) | xx;
+				array[i][j] = pixel;
+			}
+		}
+		app.setImage(new GImage(array));
+	}
+
+	private int computeLuminosity(int r, int g, int b) {
+		return GMath.round(0.299 * r + 0.587 * g + 0.114 * b);
+	}
+}
+
+class GreenScreenButton extends ImageShopButton {
+
+	public GreenScreenButton() {
+		super("Green Screen");
+	}
+
+	/*
+	 * Erases green pixels that are twice as large as the maximum of red and blue components
 	 */
 
 	public void execute(ImageShop app) {
@@ -238,17 +273,17 @@ class GrayscaleButton extends ImageShopButton {
 			for (int j = 0; j < width; j++) {
 				int pixel = array[i][j];
 				int red = GImage.getRed(pixel);
-				int green = (pixel >> 8) & 0xFF;
-				int blue = pixel & 0xFF;
-				int xx = computeLuminosity(red, green, blue);
-				pixel = GImage.createRGBPixel(red, green, blue);
-				array[i][j] = pixel;
+				int green = GImage.getGreen(pixel);
+				int blue = GImage.getBlue(pixel);
+				int alpha = 0;
+				int maxNum = Math.max(red, blue);
+				if (green >= maxNum * 2) {
+					pixel = GImage.createRGBPixel(red, green, blue, alpha);
+					array[i][j] = pixel;
+				}
 			}
 		}
 		app.setImage(new GImage(array));
 	}
-	
-	private int computeLuminosity(int r, int g, int b) {
-		return GMath.round(0.299 * r + 0.587 * g + 0.114 * b);
-	}
+}
 }
