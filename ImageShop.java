@@ -18,6 +18,7 @@ public class ImageShop extends GraphicsProgram {
 		add(new FlipHorizontalButton(), WEST);
 		add(new RotateLeftButton(), WEST);
 		add(new RotateRightButton(), WEST);
+		add(new GrayscaleButton(), WEST);
 		addActionListeners();
 		ui = new ImageShopUI(this);
 	}
@@ -213,5 +214,41 @@ class RotateRightButton extends ImageShopButton {
 			}
 		}
 		app.setImage(new GImage(newArray));
+	}
+}
+
+class GrayscaleButton extends ImageShopButton {
+
+	public GrayscaleButton() {
+		super("Grayscale");
+	}
+
+	/*
+	 * Creates a new image which consists of the bits in the original image
+	 * rotated right 90 degrees.  
+	 */
+
+	public void execute(ImageShop app) {
+		GImage image = app.getImage();
+		if (image == null) return;
+		int[][] array = image.getPixelArray();
+		int height = array.length;
+		int width = array[0].length;
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
+				int pixel = array[i][j];
+				int red = (pixel >> 16) & 0xFF;
+				int green = (pixel >> 8) & 0xFF;
+				int blue = pixel & 0xFF;
+				int xx = computeLuminosity(red, green, blue);
+				pixel = (0xFF << 24) | (xx << 16) | (xx << 8) | xx;
+				array[i][j] = pixel;
+			}
+		}
+		app.setImage(new GImage(array));
+	}
+	
+	private int computeLuminosity(int r, int g, int b) {
+		return GMath.round(0.299 * r + 0.587 * g + 0.114 * b);
 	}
 }
