@@ -313,6 +313,7 @@ class EqualizeButton extends ImageShopButton {
 				luminosityHistogram[luminosity]++;
 			}
 		}
+		System.out.print(luminosityHistogram);
 		for (int i = 0; i < luminosityHistogram.length - 1; i++) {
 			luminosityHistogram[i + 1] += luminosityHistogram[i];
 			luminosityCulHistogram = luminosityHistogram;
