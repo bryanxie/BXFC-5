@@ -275,7 +275,7 @@ class GreenScreenButton extends ImageShopButton {
 				int red = GImage.getRed(pixel);
 				int green = GImage.getGreen(pixel);
 				int blue = GImage.getBlue(pixel);
-				int alpha = 0;
+				int alpha = 50;
 				int maxNum = Math.max(red, blue);
 				if (green >= maxNum * 2) {
 					pixel = GImage.createRGBPixel(red, green, blue, alpha);
