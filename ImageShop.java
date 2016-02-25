@@ -317,12 +317,12 @@ class EqualizeButton extends ImageShopButton {
 			}
 		}
 		
-		int pixel = array[256][256];
-		int red = GImage.getRed(pixel);
-		int green = GImage.getGreen(pixel);
-		int blue = GImage.getBlue(pixel);
-		int luminosity = ImageShop.computeLuminosity(red, green, blue);
-		System.out.print(luminosity);
+		int p = array[256][256];
+		int r = GImage.getRed(p);
+		int g = GImage.getGreen(p);
+		int b = GImage.getBlue(p);
+		int luminosiy = ImageShop.computeLuminosity(r, g, b);
+		System.out.print(luminosiy);
 		for (int i = 1; i < luminosityHistogram.length; i++) {
 			luminosityHistogram[i] += luminosityHistogram[i - 1];
 		}
