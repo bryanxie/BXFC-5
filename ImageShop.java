@@ -285,5 +285,5 @@ class GreenScreenButton extends ImageShopButton {
 		}
 		app.setImage(new GImage(array));
 	}
-}
+
 }
